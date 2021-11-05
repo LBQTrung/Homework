@@ -1,23 +1,41 @@
-def nhap_danh_sach_so_thuc():
-    a = []
-    check = ""
-    while (check != "N") and (check != "n"):
-        n = float(input("Enter the number: "))
-        a.append(n)
-        check = input("Press 'N' or 'n' to finish, others to continue: ")
-    return a
+import random
 
-def sap_xep_danh_sach_so_thuc(x):
-    for i in range(0,len(x)-1):
-        for j in range(i+1,len(x)):
-            if (x[i] < x[j]):
-                x[i],x[j] = x[j],x[i]
-    return x
+#Step 1: Input the random list
+n = int(input("The number of list: "))
+print("Enter the range [a,b] to random")
+a = int(input("Enter a: "))
+b = int(input("Enter b: "))
+randomlist = [random.randrange(a,b+1) for i in range(0,n)]
+print("random list: ",randomlist)
 
-def main():
-    x = nhap_danh_sach_so_thuc()
-    x = sap_xep_danh_sach_so_thuc(x)
-    print("Sort list descending:",x)
+#Step 2: Check the option of user
+inputstring = "Enter the number need to find (" + str(a) +" =< x <= "+ str(b) +"): "
+x = int(input(inputstring))
+while (x < a) or (x > b):
+    print("Input error. Please try again")
+    x = int(input(inputstring))
 
-if __name__ == "__main__":
-    main()
+#Step 3: Sort random list ascending order
+for i in range(0,len(randomlist)-1):
+    for j in range(i+1,len(randomlist)):
+        if randomlist[i] > randomlist[j]:
+            randomlist[i],randomlist[j] = randomlist[j],randomlist[i]
+print("List after sort ascending order: ",randomlist)
+
+#Step 4: Find the number
+countloopstep = 0
+count = 0
+positionlist = []
+for i in range(0,len(randomlist)):
+    if x == randomlist[i]:
+        count += 1
+        countloopstep +=1
+        positionlist.append(i+1)
+    else:
+        countloopstep += 1
+if count == 0:
+    print("Not found")
+else:
+    print("The position list: ",positionlist)
+    print("The number of loop step to find this number: ",countloopstep)
+    

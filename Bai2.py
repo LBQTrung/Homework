@@ -1,19 +1,27 @@
-def nhap_danh_sach_so_nguyen(n):
-    a = [int(input("Nhập số nguyên: ")) for i in range(0,n)]
-    return a
+import random
+n = int(input("The number of list: "))
+print("Enter the range [a,b] to random")
+a = int(input("Enter a: "))
+b = int(input("Enter b: "))
 
-def sap_xep_danh_sach(x):
-    for i in range(0,len(x)-1):
-        for j in range(i+1,len(x)):
-            if (x[i] > x[j]):
-                x[i],x[j] = x[j],x[i]
-    return x
+randomlist = [random.randrange(a,b+1) for i in range(0,n)]
+print("random list: ",randomlist)
 
-def main():
-    n = int(input("Nhập số phần từ của danh sách: "))
-    x = nhap_danh_sach_so_nguyen(n)
-    x = sap_xep_danh_sach(x)
-    print("Danh sách tăng dần:",x)
+inputstring = "Enter the number need to find (" + str(a) +" =< x <= "+ str(b) +"): "
+x = int(input(inputstring))
+while (x < a) or (x > b):
+    print("Input error. Please try again")
+    x = int(input(inputstring))
 
-if __name__ == "__main__":
-    main()
+countstep = 0
+for i in range(0,n):
+    if x == randomlist[i]:
+        print("The first position in random list: ",i+1)
+        countstep += 1
+        break
+    else:
+        countstep += 1
+if (countstep == n):
+    print("Not found")
+else:
+    print("The number of step to find this number: ",countstep)

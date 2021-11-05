@@ -1,9 +1,20 @@
-a = [int(input("Enter the number: ")) for i in range(0,10)] #Input 10 integer numbers
+import random
+n = int(input("The number of list: "))
+print("Enter the range [a,b] to random")
+a = int(input("Enter a: "))
+b = int(input("Enter b: "))
 
-# Sort ascending
-for i in range(len(a)-1):
-    for j in range(i+1,len(a)):
-        if (a[i] > a[j]):
-            a[i],a[j] = a[j],a[i]
+randomlist = [random.randrange(a,b+1) for i in range(0,n)]
+print("random list: ",randomlist)
 
-print("List of numbers after sorting: ",a)
+inputstring = "Enter the number need to find (" + str(a) +" =< x <= "+ str(b) +"): "
+x = int(input(inputstring))
+while (x < a) or (x > b):
+    print("Input error. Please try again")
+    x = int(input(inputstring))
+
+
+if x in randomlist:
+    print("The first position in this list: ",randomlist.index(x)+1)
+else:
+    print("Not found")
